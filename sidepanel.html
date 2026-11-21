@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>hannah's hub</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header class="topbar">
+    <form id="omnibox" autocomplete="off">
+      <input id="omnibox-input" type="text" placeholder="Search or enter URL" spellcheck="false">
+    </form>
+    <button id="settings-btn" class="icon-btn" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 20 20" width="16" height="16"><path fill="currentColor" d="M11.3 1.5l.4 2.1c.5.2 1 .5 1.4.8l2-.7 1.3 2.2-1.6 1.4c.1.5.1 1 0 1.6l1.6 1.4-1.3 2.2-2-.7c-.4.3-.9.6-1.4.8l-.4 2.1H8.7l-.4-2.1c-.5-.2-1-.5-1.4-.8l-2 .7-1.3-2.2 1.6-1.4c-.1-.5-.1-1 0-1.6L3.6 5.9 4.9 3.7l2 .7c.4-.3.9-.6 1.4-.8l.4-2.1h2.6zM10 7a3 3 0 100 6 3 3 0 000-6z"/></svg>
+    </button>
+  </header>
+
+  <main id="scroll">
+    <section id="favorites" class="favorites" aria-label="Favorites"></section>
+    <section id="folders" aria-label="Folders"></section>
+    <section id="prs" aria-label="GitHub pull requests"></section>
+    <div class="divider" id="today-divider"><span id="today-label">Today</span><button id="clear-today" class="link-btn" title="Close all unpinned tabs in Today">Clear</button></div>
+    <section id="tabs" aria-label="Open tabs"></section>
+  </main>
+
+  <div id="menu" class="menu" hidden></div>
+  <div id="picker" class="picker" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+  <input id="file-input" type="file" accept="image/*" hidden>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

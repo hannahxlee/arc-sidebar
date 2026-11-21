@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>hannah's hub settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>hannah's hub</h1>
+    <p class="lede">Settings for your sidebar, GitHub pull requests, and keyboard shortcuts.</p>
+
+    <section id="setup-banner" class="card banner" hidden>
+      <h2>Finish setting up <span class="combo" id="banner-combo">⌘⇧C</span> for Copy URL</h2>
+      <p class="help">Chrome uses <span class="combo-inline" id="banner-combo-2">⌘⇧C</span> for DevTools, so it didn't let the extension take it automatically. You can claim it yourself in three steps.</p>
+      <ol class="steps">
+        <li>Click <b>Open Chrome's shortcut settings</b> below.</li>
+        <li>Find <b>hannah's hub → Copy the current tab's URL</b> and click the pencil icon.</li>
+        <li>Press <b id="banner-combo-3">⌘⇧C</b>. Chrome then gives the shortcut to the extension instead of DevTools.</li>
+      </ol>
+      <button class="btn primary open-shortcuts">Open Chrome's shortcut settings</button>
+      <details class="alt">
+        <summary>Pressing ⌘⇧C in that field opens DevTools or doesn't record?</summary>
+        <p class="help">Set the shortcut from the console instead.</p>
+        <ol class="steps">
+          <li>Open <code>chrome://extensions</code>. Chrome doesn't allow extensions to open this page for you.</li>
+          <li>Press <b>⌥⌘J</b> to open the console.</li>
+          <li>Paste the line below and press Return.</li>
+        </ol>
+        <div class="code-wrap"><pre id="console-snippet"></pre></div>
+        <button class="btn" id="copy-snippet">Copy line</button>
+        <span id="snippet-status" class="status"></span>
+      </details>
+      <p class="help small">Until then, the shortcut still works on regular web pages through the extension's in-page fallback. It won't work on <code>chrome://</code> pages or while the address bar has focus.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tabs</h2>
+      <label class="check"><input id="switch-existing" type="checkbox"> Switch to an already-open tab</label>
+      <p class="help small">When you open a new tab (⌘T) and go to a page that's already open, the new tab closes and Chrome switches to the existing one. Click <b>Open in new tab</b> in the message that appears to open it separately.</p>
+    </section>
+
+    <section class="card">
+      <h2>Chrome vertical tabs</h2>
+      <p class="help">Turn on Chrome's vertical tabs by right-clicking the tab strip and choosing <b>Show tabs vertically</b>. With this option on, the sidebar works together with Chrome's tab list.</p>
+      <label class="check"><input id="native-tabs" type="checkbox"> Integrate with Chrome's vertical tabs</label>
+      <ul class="help list">
+        <li>Favorites become pinned tabs. Pinning a tab in Chrome adds it to Favorites, and unpinning removes it.</li>
+        <li>Folders become tab groups with the same name. Dragging a tab into a folder's group adds it to the folder, and dragging it out removes it. Renaming or recoloring the group updates the folder.</li>
+        <li>PRs opened from the sidebar collect in a "Pull Requests" group.</li>
+        <li>The sidebar's Today list still shows all your open tabs that aren't in a Favorite or folder.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>GitHub pull requests</h2>
+      <p class="help">Create a <a href="https://github.com/settings/tokens/new?scopes=repo,read:org&description=hannah%27s%20hub" target="_blank" rel="noopener">classic personal access token</a> with the <code>repo</code> and <code>read:org</code> scopes. A fine-grained token with read access to pull requests also works, but only for the repositories it covers. The token stays in this browser's local extension storage and is only sent to api.github.com.</p>
+      <label class="field">
+        <span>Personal access token</span>
+        <div class="inline">
+          <input id="token" type="password" placeholder="ghp_…" autocomplete="off" spellcheck="false">
+          <button id="save-token" class="btn primary">Save</button>
+          <button id="test-token" class="btn">Test</button>
+          <button id="clear-token" class="btn">Remove</button>
+        </div>
+      </label>
+      <p id="token-status" class="status"></p>
+      <label class="field">
+        <span>Refresh every</span>
+        <div class="inline">
+          <select id="refresh">
+            <option value="1">1 minute</option>
+            <option value="3">3 minutes</option>
+            <option value="5">5 minutes</option>
+            <option value="10">10 minutes</option>
+            <option value="30">30 minutes</option>
+          </select>
+        </div>
+      </label>
+      <label class="check"><input id="include-assigned" type="checkbox"> Also show PRs assigned to me that I didn't author</label>
+    </section>
+
+    <section class="card">
+      <h2>Browser-wide shortcuts</h2>
+      <p class="help">These work everywhere, including on new-tab and <code>chrome://</code> pages, even when the page has focus. Chrome manages them, so change them on Chrome's shortcuts page. <b>⌘⇧C</b> copies the current URL by default.</p>
+      <table id="commands" class="table"></table>
+      <button class="btn open-shortcuts">Edit in Chrome's shortcut settings…</button>
+    </section>
+
+    <section class="card">
+      <h2>Custom in-page shortcuts</h2>
+      <p class="help">Bind any key combination to an action. These run on regular web pages. They don't run on <code>chrome://</code> pages, the Chrome Web Store, or when the address bar has focus. Click a shortcut, then press the new keys. Press Esc to cancel or Backspace to clear.</p>
+      <table id="shortcuts" class="table"></table>
+      <button id="reset-shortcuts" class="btn">Restore defaults</button>
+      <p id="shortcut-status" class="status"></p>
+    </section>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
